@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace M2HW2
 {
+    using System;
+    using System.Collections.Generic;
+
     internal class Program
     {
-        public static List<Product> AddProducts(List<Product>productsList,int count)
+        public static List<Product> AddProducts(List<Product> productsList, int count)
         {
-
             int[] arrayOfKey = new int[count];
             for (int i = 0; i < count; i++)
             {
@@ -23,22 +25,25 @@ namespace M2HW2
                     _ = Dictionaries.GetYourProducts().TryGetValue(arrayOfKey[i], out string product);
                     _ = Dictionaries.GetProductsWithPrice().TryGetValue(product, out decimal price);
                     productsList.Add(new Product(product, price));
-
                 }
             }
+
             return productsList;
         }
+
         public static void MakeOrder(Basket basket)
         {
             List<Product> order = basket.Products;
             Console.WriteLine($"Номер заказа: {basket.Id}");
-            foreach(var item in order)
+            foreach (var item in order)
             {
                 Console.WriteLine(item.ToString());
             }
+
             Console.WriteLine("---------------------------");
             Console.WriteLine($"Итог: {basket.Total()}");
         }
+
         public static void PrintInfo()
         {
             Console.WriteLine("Введите номер продукта по списку,который хотите приобрести(каждый с новой строки):");
@@ -48,12 +53,13 @@ namespace M2HW2
                 "7.Чипсы Pringles Original\n8.Тунец Coloso в оливковом масле\n" +
                 "9.Ананас кольцами Tropic Life\n10.Шпроты Diplomats рижские в масле\n");
         }
-        static void Main(string[] args)
+
+        public static void Main(string[] args)
         {
             Console.WriteLine("              Вас приветствует продуктовый интернет-магазин!");
             Console.WriteLine("\nВведите количество продуктов для покупки:");
-            bool result=int.TryParse(Console.ReadLine(), out int count);
-            if (result == false || count>10 || count<0)
+            bool result = int.TryParse(Console.ReadLine(), out int count);
+            if (result == false || count > 10 || count < 0)
             {
                 Console.WriteLine("Проверьте ввод,что-то пошло нет так");
             }
@@ -61,7 +67,7 @@ namespace M2HW2
             {
                 List<Product> productsList = new List<Product>();
                 PrintInfo();
-                var list = AddProducts(productsList,count);
+                var list = AddProducts(productsList, count);
                 Console.WriteLine("Сформировать корзину: введите 1\nДобавить товары в корзину: введите 2\n" +
                     "Офоhмить заказ окончательно: введите 3");
                 bool check = true;
@@ -89,6 +95,7 @@ namespace M2HW2
                                 {
                                     Console.WriteLine("Ошибка!");
                                 }
+
                                 break;
                             case 3:
                                 Console.WriteLine("Формируем окончательно заказ...");
@@ -105,15 +112,8 @@ namespace M2HW2
                     {
                         Console.WriteLine("Неверный ввод,повторите попытку!");
                     }
-                    
-                  
-
                 }
             }
-
-
-
-
         }
     }
 }
