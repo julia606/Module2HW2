@@ -9,6 +9,40 @@ namespace M2HW2
 
     internal class Program
     {
+        public static Dictionary<int, string> GetYourProducts()
+        {
+            return new Dictionary<int, string>()
+            {
+                { 1, "Апельсиновый сок Sandora" },
+                { 2,  "Овсяные хлопья Elovena без глютена" },
+                { 3,  "Оливковое масло Olio Dante Extra Virgin" },
+                { 4,  "Конфеты Raffaello" },
+                { 5, "Соус Barilla Песто Дженовезе" },
+                { 6, "Колбаса сыровяленая Discovery Salame высшего сорта" },
+                { 7, "Чипсы Pringles Original" },
+                { 9, "Ананас кольцами Tropic Life" },
+                { 8, "Тунец Coloso в оливковом масле" },
+                { 10, "Шпроты Diplomats рижские в масле" },
+            };
+        }
+
+        public static Dictionary<string, decimal> GetProductsWithPrice()
+        {
+            return new Dictionary<string, decimal>()
+            {
+                { "Апельсиновый сок Sandora", 35 },
+                { "Овсяные хлопья Elovena без глютена", 120 },
+                { "Оливковое масло Olio Dante Extra Virgin", 198 },
+                { "Конфеты Raffaello", 78 },
+                { "Соус Barilla Песто Дженовезе", 64 },
+                { "Колбаса сыровяленая Discovery Salame высшего сорта", 236 },
+                { "Чипсы Pringles Original", 69 },
+                { "Ананас кольцами Tropic Life", 54 },
+                { "Тунец Coloso в оливковом масле", 85 },
+                { "Шпроты Diplomats рижские в масле", 77 },
+            };
+        }
+
         public static List<Product> AddProducts(List<Product> productsList, int count)
         {
             int[] arrayOfKey = new int[count];
@@ -22,8 +56,8 @@ namespace M2HW2
                 }
                 else
                 {
-                    _ = Dictionaries.GetYourProducts().TryGetValue(arrayOfKey[i], out string product);
-                    _ = Dictionaries.GetProductsWithPrice().TryGetValue(product, out decimal price);
+                    _ = Program.GetYourProducts().TryGetValue(arrayOfKey[i], out string product);
+                    _ = Program.GetProductsWithPrice().TryGetValue(product, out decimal price);
                     productsList.Add(new Product(product, price));
                 }
             }
